@@ -8,7 +8,11 @@ export const unstable_settings = {
 export default function RootLayoutNav() {
   return (
     <Stack>
+      <Stack.Screen name="signIn" options={{ headerShown: false }} />
+      <Stack.Screen name="signUp" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="search" options={{ headerShown: false }} />
+      <Stack.Screen name="chat" options={{ headerShown: false }} />
     </Stack>
   );
 }
