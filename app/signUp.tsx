@@ -14,6 +14,7 @@ import { Stack, useNavigation } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import api from "@/store/api";
 
 const signUp = () => {
   const [username, setUsername] = useState("");
@@ -68,6 +69,32 @@ const signUp = () => {
     ) {
       return;
     }
+
+    // Make API request
+    api({
+      method: "POST",
+      url: "/chat/signup/",
+      data: {
+        username,
+        first_name: firstName,
+        last_name: lastName,
+        password,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else if (err.request) {
+          console.log(err.request);
+        } else {
+          console.log("Error", err.message);
+        }
+      });
   };
   return (
     <>
