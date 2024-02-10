@@ -1,5 +1,4 @@
 import {
-  View,
   Text,
   SafeAreaView,
   TouchableOpacity,
@@ -10,11 +9,12 @@ import {
   Keyboard,
 } from "react-native";
 import React, { useState } from "react";
-import { Stack, useNavigation } from "expo-router";
+import { Stack, useNavigation, useRouter } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import api from "@/store/api";
+import useStore from "@/store/store";
 
 const signUp = () => {
   const [username, setUsername] = useState("");
@@ -29,7 +29,10 @@ const signUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
+  const login = useStore((state) => state.login);
+
   const navigation = useNavigation();
+  const router = useRouter();
 
   const onSignUp = () => {
     // Validate username
@@ -83,6 +86,8 @@ const signUp = () => {
     })
       .then((res) => {
         console.log(res.data);
+        login(res.data);
+        router.push("/(tabs)/requests");
       })
       .catch((err) => {
         if (err.response) {

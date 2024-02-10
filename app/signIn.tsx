@@ -3,25 +3,28 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  TextInput,
   KeyboardAvoidingView,
   Platform,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import React, { useState } from "react";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import api from "@/store/api";
+import useStore from "@/store/store";
 
 const signIn = () => {
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const login = useStore((state) => state.login);
 
   const onSignIn = () => {
     // Validate username
@@ -50,6 +53,10 @@ const signIn = () => {
     })
       .then((res) => {
         console.log(res.data);
+        const { user, tokens } = res.data;
+        login({ ...user, tokens });
+
+        router.push("/(tabs)/requests");
       })
       .catch((err) => {
         if (err.response) {

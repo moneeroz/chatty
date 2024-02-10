@@ -2,8 +2,8 @@ import { create } from "zustand";
 
 interface GlobalState {
   authenticated: boolean;
-  user: User | {};
-  login: (username: string, password: string) => void;
+  user: User | null;
+  login: (user: User) => void;
   logout: () => void;
 }
 
@@ -11,7 +11,11 @@ interface User {
   id: number;
   name: string;
   username: string;
-  thumbnail: string;
+  thumbnail: string | null;
+  tokens: {
+    access: string;
+    refresh: string;
+  };
 }
 
 const useStore = create<GlobalState>()((set) => ({
@@ -20,12 +24,12 @@ const useStore = create<GlobalState>()((set) => ({
   // -------------------
 
   authenticated: false,
-  user: {},
+  user: null,
   login: (user) => {
     set({ authenticated: true, user });
   },
   logout: () => {
-    set({ authenticated: false, user: {} });
+    set({ authenticated: false, user: null });
   },
 }));
 
