@@ -1,12 +1,15 @@
-import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
+import useStore from "@/store/store";
+import { Redirect } from "expo-router";
 
 const index = () => {
-  return (
-    <SafeAreaView>
-      <Text>Home</Text>
-    </SafeAreaView>
-  );
+  const authenticated = useStore((state) => state.authenticated);
+
+  if (!authenticated) {
+    return <Redirect href="/signIn" />;
+  } else {
+    return <Redirect href="/(tabs)/requests" />;
+  }
 };
 
 export default index;
