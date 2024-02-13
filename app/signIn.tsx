@@ -14,8 +14,11 @@ import Button from "@/components/Button";
 import { Link, useRouter } from "expo-router";
 import api from "@/store/api";
 import useStore from "@/store/store";
+import secure from "@/utils/secure";
+import { useAuth } from "@/context/AuthContext";
 
 const signIn = () => {
+  const { signIn } = useAuth();
   const router = useRouter();
 
   const [username, setUsername] = useState("");
@@ -43,32 +46,7 @@ const signIn = () => {
     }
 
     // Make API request
-    api({
-      method: "POST",
-      url: "/chat/signin/",
-      data: {
-        username,
-        password,
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        const { user, tokens } = res.data;
-        login({ ...user, tokens });
-
-        router.push("/(tabs)/requests");
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err.response.data);
-          console.log(err.response.status);
-          console.log(err.response.headers);
-        } else if (err.request) {
-          console.log(err.request);
-        } else {
-          console.log("Error", err.message);
-        }
-      });
+    signIn(username, password);
   };
 
   return (

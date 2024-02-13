@@ -36,8 +36,8 @@ const signUp = () => {
 
   const onSignUp = () => {
     // Validate username
-    if (!username || username.length < 5) {
-      setUsernameError("Username must be at least 5 characters long");
+    if (!username || username.length < 4) {
+      setUsernameError("Username must be at least 4 characters long");
     }
 
     // Validate first name
