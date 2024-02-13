@@ -1,15 +1,9 @@
 import React from "react";
-import useStore from "@/store/store";
-import { Redirect } from "expo-router";
+
+import { Text } from "react-native";
 
 const index = () => {
-  const authenticated = useStore((state) => state.authenticated);
-
-  if (!authenticated) {
-    return <Redirect href="/signIn" />;
-  } else {
-    return <Redirect href="/(tabs)/requests" />;
-  }
+  return <Text>Index</Text>;
 };
 
 export default index;

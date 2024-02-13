@@ -154,7 +154,7 @@ const responseRequestConnect = (get: any, set: any, connection: any) => {
 };
 
 const responseRequestList = (get: any, set: any, requestList: any) => {
-  set({ requestList: requestList });
+  set({ requestList });
 };
 
 const responseSearch = (get: any, set: any, data: any) => {
@@ -244,17 +244,18 @@ const useStore = create<GlobalState>()((set, get) => ({
     };
 
     socket.onclose = () => {
-      const socket = get().socket;
-      if (socket) {
-        socket.close();
-      }
-      set({ socket: null });
       console.log("Socket disconnected");
     };
 
     set({ socket });
   },
-  socketDisconnect: () => {},
+  socketDisconnect: () => {
+    const socket = get().socket;
+    if (socket) {
+      socket.close();
+    }
+    set({ socket: null });
+  },
 
   // -------------------
   // Search
