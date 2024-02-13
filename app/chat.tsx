@@ -1,24 +1,18 @@
 import {
   View,
-  Text,
   SafeAreaView,
   TouchableOpacity,
-  Animated,
-  Easing,
-  TextInput,
   Platform,
   InputAccessoryView,
 } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import React, { useEffect, useRef, useState } from "react";
-import Thumbnail from "@/components/Thumbnail";
+import React, { useEffect, useState } from "react";
+
 import { GenaricUser } from "@/store/types";
 import { Stack, useLocalSearchParams, useNavigation } from "expo-router";
 import useStore from "@/store/store";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MessageHeader from "@/components/chat/MessageHeader";
-import MessageBubbleMe from "@/components/chat/MessageBubbleMe";
-import MessageBubbleFriend from "@/components/chat/MessageBubbleFriend";
 import MessageBubble from "@/components/chat/MessageBubble";
 import MessageInput from "@/components/chat/MessageInput";
 
