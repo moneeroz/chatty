@@ -12,8 +12,9 @@ import useStore from "@/store/store";
 import Thumbnail from "@/components/Thumbnail";
 import formatTime from "@/utils/formatTime";
 import { Link } from "expo-router";
+import { FriendListItem } from "@/store/types";
 
-const FriendRow = ({ item }: any) => {
+const FriendRow = ({ item }: { item: FriendListItem }) => {
   console.log("helloooooo", item);
   return (
     <TouchableOpacity>

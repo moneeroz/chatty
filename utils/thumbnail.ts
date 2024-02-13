@@ -7,7 +7,6 @@ const thumbnail = (url: string | undefined | null) => {
     return ProfileImage;
   }
 
-  console.log({ uri: "http://" + ADDRESS + url });
   return { uri: "http://" + ADDRESS + url };
 };
 

@@ -11,8 +11,13 @@ import Empty from "@/components/Empty";
 import Cell from "@/components/Cell";
 import Thumbnail from "@/components/Thumbnail";
 import formatTime from "@/utils/formatTime";
+import { RequestListItem } from "@/store/types";
 
-const RequestAccept = ({ item }: any) => {
+interface Props {
+  item: RequestListItem;
+}
+
+const RequestAccept = ({ item }: Props) => {
   const requestAccept = useStore((state) => state.requestAccept);
 
   return (
@@ -33,7 +38,7 @@ const RequestAccept = ({ item }: any) => {
   );
 };
 
-const RequestRow = ({ item }: any) => {
+const RequestRow = ({ item }: Props) => {
   const message = "Requested to connect with you";
   const time = formatTime(item.created);
   return (

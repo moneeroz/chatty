@@ -11,6 +11,7 @@ import useStore from "@/store/store";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as ImagePicker from "expo-image-picker";
 import thumbnail from "@/utils/thumbnail";
+import { useAuth } from "@/context/AuthContext";
 
 const ProfileImage = () => {
   const uploadThumbnail = useStore((state) => state.uploadThumbnail);
@@ -59,9 +60,10 @@ const ProfileImage = () => {
 
 const Signout = () => {
   const logout = useStore((state) => state.logout);
+  const { signOut } = useAuth();
 
   return (
-    <TouchableOpacity style={styles.signout} onPress={logout}>
+    <TouchableOpacity style={styles.signout} onPress={signOut}>
       <FontAwesome name="sign-out" size={20} color="#d0d0d0" />
       <Text style={styles.signoutText}>Logout</Text>
     </TouchableOpacity>
