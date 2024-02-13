@@ -30,6 +30,7 @@ const SearchButton = ({ user }: Props) => {
   }
 
   const requestConnect = useStore((state) => state.requestConnect);
+  const requestAccept = useStore((state) => state.requestAccept);
 
   interface Data {
     text: string;
@@ -53,7 +54,7 @@ const SearchButton = ({ user }: Props) => {
     case "pending-me":
       data.text = "Accept";
       data.disabled = false;
-      data.onPress = () => {};
+      data.onPress = () => requestAccept(user.username);
       break;
     default:
       break;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Redirect, Slot, Tabs, useRouter } from "expo-router";
-import { Text, TouchableOpacity } from "react-native";
+import { Tabs, useRouter } from "expo-router";
+import { TouchableOpacity } from "react-native";
 import useStore from "@/store/store";
 import { useAuth } from "@/context/AuthContext";
 
@@ -17,9 +17,6 @@ export default function TabLayout() {
   const socketConnect = useStore((state) => state.socketConnect);
   const socketDisconnect = useStore((state) => state.socketDisconnect);
 
-  const { authState, initialized } = useAuth();
-  const { authenticated } = authState;
-
   const router = useRouter();
 
   useEffect(() => {
@@ -29,14 +26,6 @@ export default function TabLayout() {
       socketDisconnect();
     };
   }, []);
-
-  // if (!initialized) {
-  //   return <Text>Loading...</Text>;
-  // }
-
-  // if (!authenticated) {
-  //   return <Redirect href="/signIn" />;
-  // }
 
   const onSearch = () => {
     router.push("/search");
